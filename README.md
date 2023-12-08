@@ -1,7 +1,7 @@
 
 # api-publisher-test-api
 
-This is a placeholder README.md for a new repository
+This service will be used to test publish failures.
 
 ### License
 
