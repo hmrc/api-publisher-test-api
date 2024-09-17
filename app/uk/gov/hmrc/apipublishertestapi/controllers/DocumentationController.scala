@@ -21,18 +21,30 @@ import scala.concurrent.Future.successful
 
 import controllers.Assets
 
+import play.api.libs.json.{Json, OFormat}
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.play.bootstrap.backend.controller.BackendController
 
+case class DefinitionLocation(location: String)
+
+object DefinitionLocation {
+  implicit val format: OFormat[DefinitionLocation] = Json.format[DefinitionLocation]
+}
+
 @Singleton
 class DocumentationController @Inject() (assets: Assets, cc: ControllerComponents) extends BackendController(cc) {
+  private var definitionLocation: String = "notfound.json"
 
-  def definition(): Action[AnyContent] = Action.async {
-    // assets.at("/public/api", "definition.json")
-    successful(NotFound)
+  def definition(): Action[AnyContent] = {
+    assets.at("/public/api/definitions", definitionLocation)
+  }
+
+  def setDefinition(): Action[DefinitionLocation] = Action.async(parse.json[DefinitionLocation]) { implicit request =>
+    definitionLocation = request.body.location
+    successful(NoContent)
   }
 
   def specification(version: String, file: String): Action[AnyContent] = {
-    assets.at(s"/public/api/conf/$version", file)
+    assets.at(s"/public/api/conf/1.0", file)
   }
 }

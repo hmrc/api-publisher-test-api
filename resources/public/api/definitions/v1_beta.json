@@ -1,0 +1,15 @@
+{
+  "api": {
+    "name": "Publisher Test",
+    "description": "An api that is used to test publishing flows",
+    "context": "test/publisher",
+    "categories": ["OTHER"],
+    "versions": [
+      {
+        "version": "1.0",
+        "status": "BETA",
+        "endpointsEnabled": true
+      }
+    ]
+  }
+}
