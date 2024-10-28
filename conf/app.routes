@@ -1,4 +1,5 @@
 # microservice specific routes
 
 GET        /hello-world             uk.gov.hmrc.apipublishertestapi.controllers.MicroserviceHelloWorldController.hello
+GET        /hello-world2            uk.gov.hmrc.apipublishertestapi.controllers.MicroserviceHelloWorldController.hello2
 POST       /set-definition          uk.gov.hmrc.apipublishertestapi.controllers.DocumentationController.setDefinition()

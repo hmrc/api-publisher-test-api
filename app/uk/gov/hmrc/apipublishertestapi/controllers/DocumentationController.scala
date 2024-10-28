@@ -45,6 +45,6 @@ class DocumentationController @Inject() (assets: Assets, cc: ControllerComponent
   }
 
   def specification(version: String, file: String): Action[AnyContent] = {
-    assets.at(s"/public/api/conf/1.0", file)
+    assets.at(s"/public/api/conf/$version", file)
   }
 }
