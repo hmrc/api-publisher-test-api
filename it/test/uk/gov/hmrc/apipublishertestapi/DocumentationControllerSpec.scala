@@ -103,6 +103,38 @@ class DocumentationControllerSpec
                                           |  }
                                           |}""".stripMargin)
     }
+  }
+
+  "specification endpoint" should {
+
+    "respond with 200 status" in {
+      val response = wsClient
+        .url(s"$baseUrl/api/conf/1.0/application.yaml")
+        .get()
+        .futureValue
+
+      response.status shouldBe 200
+      response.body should include("/hello-world:")
+      response.body shouldNot include("/hello-world2:")
+    }
+
+    "respond with 204 status when changing specification" in {
+      val setResponse =
+        wsClient
+          .url(s"$baseUrl/set-specification")
+          .post(Json.obj("location" -> "application2.yaml"))
+          .futureValue
+
+      setResponse.status shouldBe 204
+
+      val response = wsClient
+        .url(s"$baseUrl/api/conf/1.0/application.yaml")
+        .get()
+        .futureValue
+
+      response.status shouldBe 200
+      response.body should include("/hello-world2:")
+    }
 
   }
 }

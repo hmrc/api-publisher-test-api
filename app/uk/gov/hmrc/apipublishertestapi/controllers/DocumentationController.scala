@@ -33,7 +33,8 @@ object DefinitionLocation {
 
 @Singleton
 class DocumentationController @Inject() (assets: Assets, cc: ControllerComponents) extends BackendController(cc) {
-  private var definitionLocation: String = "notfound.json"
+  private var definitionLocation: String                 = "notfound.json"
+  private var maybeSpecificationLocation: Option[String] = None
 
   def definition(): Action[AnyContent] = {
     assets.at("/public/api/definitions", definitionLocation)
@@ -45,6 +46,14 @@ class DocumentationController @Inject() (assets: Assets, cc: ControllerComponent
   }
 
   def specification(version: String, file: String): Action[AnyContent] = {
-    assets.at(s"/public/api/conf/$version", file)
+    maybeSpecificationLocation match {
+      case Some(specificationLocation) if (file == "application.yaml") => assets.at(s"/public/api/conf/1.0", specificationLocation)
+      case _                                                           => assets.at(s"/public/api/conf/1.0", file)
+    }
+  }
+
+  def setSpecification(): Action[DefinitionLocation] = Action.async(parse.json[DefinitionLocation]) { implicit request =>
+    maybeSpecificationLocation = Some(request.body.location)
+    successful(NoContent)
   }
 }
