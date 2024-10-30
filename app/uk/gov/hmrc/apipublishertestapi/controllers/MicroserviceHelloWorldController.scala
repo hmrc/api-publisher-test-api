@@ -29,4 +29,8 @@ class MicroserviceHelloWorldController @Inject() (cc: ControllerComponents)
   def hello(): Action[AnyContent] = Action.async { implicit request =>
     Future.successful(Ok("Hello world"))
   }
+
+  def hello2(): Action[AnyContent] = Action.async { implicit request =>
+    Future.successful(Ok("Hello world 2"))
+  }
 }
