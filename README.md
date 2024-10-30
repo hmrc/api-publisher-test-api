@@ -6,7 +6,7 @@ This can now be updated with the following curl afterwards it will respond with 
 These are defined in resources/public/api/definitions
 
 ```bash
-curl -X POST --location "http://localhost:XXX/set-definition" \
+curl -X POST --location "http://localhost:15509/set-definition" \
     -H "Content-Type: application/json" \
     -d '{
           "location": "v1_stable_v2_alpha.json"
@@ -27,7 +27,7 @@ By default, the API will return resources/public/api/conf/1.0/application.yaml w
 However, it will return an alternative OAS file (e.g. application2.yaml) if the following is run first:
 
 ```bash
-curl -X POST --location "http://localhost:XXX/set-specification" \
+curl -X POST --location "http://localhost:15509/set-specification" \
     -H "Content-Type: application/json" \
     -d '{
           "location": "application2.yaml"
