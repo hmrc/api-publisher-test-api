@@ -18,8 +18,8 @@ curl -X POST --location "http://localhost:15509/set-definition" \
 | Failed publish no definition             | Not found             | notfound                   |
 | Successful publish Alpha version         | v1 ALPHA PUBLIC       | v1_alpha.json              |
 | Successful publish Beta version          | v1 BETA PUBLIC        | v1_beta.json               |
-| Successful publish Private version       | v1 BETA PRIVATE       | v1_beta_private.json       |
-| Successful publish Private trial version | v1 BETA PRIVATE trial | v1_beta_private_trial.json |
+| Successful publish Internal version      | v1 BETA INTERNAL      | v1_beta_internal.json      |
+| Successful publish Controlled version    | v1 BETA CONTROLLED    | v1_beta_controlled.json    |
 | Successful publish two versions          | v1 STABLE -> v2 ALPHA | v1_stable_v2_alpha.json    |
 
 
